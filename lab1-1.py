@@ -24,7 +24,7 @@ def PrintSomeHeaders(headersDict, someHeadersList):
     # για κάθε επιθυμητό header, αν είναι κενός set-cookie header ή οποιοσδήποτε άλλος header τύπωσε τις πληροφορίες του,
     # αλλιώς...
     for h in someHeadersList:
-        headerValue = headersDict.get(h)
+        headerValue = str(headersDict.get(h))
         if h=="Set-Cookie" and headerValue != "None":
             cookieElements = []
             # για κάθε στοιχείο του cookie, πρόσθεσέ το σε μια λίστα ανάλογα με τη μορφή του: 'όνομα=τιμή' ή 'όνομα' μόνο
