@@ -38,14 +38,13 @@ def PrintSomeHeaders(headersDict, someHeadersList):
                     cookieElements.append(e)
             
             cookieNameValue = cookieElements[0] # το πρώτο στοιχείο αφορά την ταυτότητα του cookie
-            print("Set-Cookie:\n\tname (without value for security reasons):\t{}\n\texpires:\t{}\n".format(cookieNameValue[0], cookieExpiration))
+            print("Set-Cookie:\n\tname, value:\t{}, {}\n\texpires:\t{}\n".format(cookieNameValue[0], cookieNameValue[1], cookieExpiration))
         else:
             # για κενό set-cookies ή για οποιοσδήποτε άλλον header, τύπωσε το όνομα και την τιμή του
             print("{}: {}\n".format(h, headerValue))
 
 
 url = input("\nInsert URL:\t")  # προσδιορισμός του url
-#url = "https://www.skroutz.gr"    # test url
 
 # αν το url δεν περιέχει http/https, βγάλε σφάλμα
 # χωρίς αυτό, θα το κάνει από μόνη της η κλήση της requests.get() παρακάτω
