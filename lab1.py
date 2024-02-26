@@ -48,7 +48,9 @@ url = input("\nInsert URL:\t")  # προσδιορισμός του url
 
 # αν το url δεν περιέχει http/https, βγάλε σφάλμα
 # χωρίς αυτό, θα το κάνει από μόνη της η κλήση της requests.get() παρακάτω
-if ("http://" not in url) and ("https://" not in url):
+if url.startswith("http://") or url.startswith("https://"):
+    pass
+else:
     print("WARNING! NO HTTP/HTTPS SCHEME DETECTED IN URL.\nEXITING...")
     exit()
 
