@@ -27,6 +27,8 @@ def PrintSomeHeaders(headersDict, someHeadersList):
         headerValue = str(headersDict.get(h))
         if h=="Set-Cookie" and headerValue != "None":
             cookieElements = []
+            cookieNameValue = []
+            cookieExpiration = '-'
             # για κάθε στοιχείο του cookie, πρόσθεσέ το σε μια λίστα ανάλογα με τη μορφή του: 'όνομα=τιμή' ή 'όνομα' μόνο
             for e in headerValue.split(';'):
                 try:
@@ -34,22 +36,22 @@ def PrintSomeHeaders(headersDict, someHeadersList):
                     if cookieElements[-1][0] == " expires": cookieExpiration = cookieElements[-1][1]    # βρες την ημ. λήξης του cookie
                 except:
                     cookieElements.append(e)
-
-            cookieName = cookieElements[0][0] # το πρώτο στοιχείο αφορά την ταυτότητα του cookie ( όνομα -> [0], τιμή -> [1] )
-            print("Set-Cookie:\n\tname (without value):\t{}\n\texpires:\t{}\n".format(cookieName, cookieExpiration))
+            
+            cookieNameValue = cookieElements[0] # το πρώτο στοιχείο αφορά την ταυτότητα του cookie
+            print("Set-Cookie:\n\tname (without value for security reasons):\t{}\n\texpires:\t{}\n".format(cookieNameValue[0], cookieExpiration))
         else:
             # για κενό set-cookies ή για οποιοσδήποτε άλλον header, τύπωσε το όνομα και την τιμή του
             print("{}: {}\n".format(h, headerValue))
 
 
 url = input("\nInsert URL:\t")  # προσδιορισμός του url
-# url = "https://www.skroutz.gr"    # test url
+#url = "https://www.skroutz.gr"    # test url
 
 # αν το url δεν περιέχει http/https, βγάλε σφάλμα
 # χωρίς αυτό, θα το κάνει από μόνη της η κλήση της requests.get() παρακάτω
 if ("http://" not in url) and ("https://" not in url):
     print("WARNING! NO HTTP/HTTPS SCHEME DETECTED IN URL.\nEXITING...")
-    #exit()
+    exit()
 
 with requests.get(url) as response:  # το αντικείμενο response
     #print(response.headers)    # τύπωσε τους όλους τους headers με τις τιμές τους
